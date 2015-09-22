@@ -11,8 +11,13 @@ class SessionsController < ApplicationController
 			# Save the user id inside the browser cookie. This is how we keep the user
 			# logged in when they navigate around our website.
 
-			session[:user_id] = user.id
-			redirect_to root_url
+			if user.email_confirmed
+				session[:user_id] = user.id
+				redirect_to root_url
+			else
+				flash.now[:error] = 'Please activate your account by following the instructions in the account confirmation email'
+			end
+			
 		else
 			# If user's login doesn't work, send them back ot the login form
 			redirect_to '/login'

@@ -30,6 +30,12 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
 
+  resources :users do
+    member do 
+      get :confirm_email
+    end
+  end
+
   # Example resource route with options:
   #   resources :products do
   #     member do
