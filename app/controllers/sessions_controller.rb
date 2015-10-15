@@ -16,6 +16,7 @@ class SessionsController < ApplicationController
 				redirect_to root_url
 			else
 				flash.now[:error] = 'Please activate your account by following the instructions in the account confirmation email'
+				render "new"
 			end
 			
 		else

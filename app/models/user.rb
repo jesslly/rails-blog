@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-	validates :email, presence: true
+	validates_uniqueness_of :email, presence: true, :case_sensitive => false
 	validates_format_of :email, :with => /@/
 	validates :password, :length => {:within => 6..40}
 
@@ -12,11 +12,11 @@ class User < ActiveRecord::Base
     	if self.confirm_token.blank?
       		self.confirm_token = SecureRandom.urlsafe_base64.to_s
     	end
-  	end
+  end
 
-  	def email_activate
+  def email_activate
       self.email_confirmed = true
       self.confirm_token = nil
       save!(:validate => false)
-    end
+  end
 end

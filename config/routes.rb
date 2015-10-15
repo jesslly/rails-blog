@@ -36,6 +36,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :password_resets
+
   # Example resource route with options:
   #   resources :products do
   #     member do
